@@ -12,12 +12,18 @@ function getUserEmailByUserId(userId, callback) {
     }, 1000)
 }
 
-function getUserEmailByToken(token) {
+function getUserEmailByToken(token, callback) {
     getUserIdByToken(token, function(userId) {
         getUserEmailByUserId(userId, function(userEmail) {
-            console.log(userEmail)
+            callback(userEmail)
         })
     })
 }
 
-getUserEmailByToken('1xxx')
+getUserEmailByToken('1xxx', function (userEmail) {
+    console.log(userEmail) // 1@mail.com
+})
+
+getUserEmailByToken('2xxx', function (userEmail) {
+    console.log(userEmail) // 2@mail.com
+})

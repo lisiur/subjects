@@ -13,8 +13,12 @@ function rejectP(n) {
 }
 
 async function handleError() {
-  const data = await rejectP(100)
-  console.log('success', data)
+  try {
+    const data = await rejectP(100)
+    console.log('success', data)
+  } catch (err) {
+    
+  }
 }
 
 handleError()

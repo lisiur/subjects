@@ -1,6 +1,6 @@
 // Promise.resolve
 
-Promise.resolve(1)
+Promise.resolve()
 .then(data => {
   console.log(data)
 })
@@ -10,3 +10,9 @@ Promise.resolve(1)
 // - thenable
 // - others
 // - no arg
+
+// {
+//   than((resolve, reject) => {
+
+//   })
+// }

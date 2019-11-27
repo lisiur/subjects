@@ -12,16 +12,17 @@ function getUserEmailByUserId(userId, callback) {
     }, 1000)
 }
 
-// function getUserIdByTokenP(token) {
-//     return new P (resolve => {
-//         getUserIdByToken(token, resolve)
-//     })
-// }
-// function getUserEmailByUserIdP(userId) {
-//     return new P (resolve => {
-//         getUserEmailByUserId(userId, resolve)
-//     })
-// }
+function getUserIdByTokenP(token) {
+    return new P (resolve => {
+        getUserIdByToken(token, resolve)
+    })
+}
+
+function getUserEmailByUserIdP(userId) {
+    return new P (resolve => {
+        getUserEmailByUserId(userId, resolve)
+    })
+}
 
 
 function P(fn) {
@@ -63,23 +64,23 @@ P.prototype.then = function(fn) {
 
 function getUserEmailByToken(token) {
 
-    new P(resolve => {
-        getUserIdByToken(token, resolve)
-    }).then(userId => {
-        return new P(resolve => {
-            getUserEmailByUserId(userId, resolve)
-        })
-    }).then(userEmail => {
-        console.log(userEmail)
-    })
-
-    // getUserIdByTokenP(token)
-    // .then(userId => {
-    //     return getUserEmailByUserIdP(userId)
-    // })
-    // .then(userEmail => {
+    // const p = new P(resolve => {
+    //     getUserIdByToken(token, resolve)
+    // }).then(userId => {
+    //     return new P(resolve => {
+    //         getUserEmailByUserId(userId, resolve)
+    //     })
+    // }).then(userEmail => {
     //     console.log(userEmail)
     // })
+
+    getUserIdByTokenP(token)
+    .then(userId => {
+        return getUserEmailByUserIdP(userId)
+    })
+    .then(userEmail => {
+        console.log(userEmail)
+    })
 }
 
 getUserEmailByToken('1xxx')

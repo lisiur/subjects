@@ -12,23 +12,23 @@ function rejectP(n) {
   });
 }
 
-Promise.race([
-  resolveP(100),
-  resolveP(200),
-  resolveP(300),
-])
-.then(data => {
-  console.log(data)
-})
-
 // Promise.race([
-//   rejectP(500),
+//   resolveP(100),
 //   resolveP(200),
 //   resolveP(300),
 // ])
 // .then(data => {
-//   console.log('then', data)
+//   console.log(data)
 // })
-// .catch(err => {
-//   console.log('catch', err.message)
-// })
+
+Promise.race([
+  rejectP(100),
+  resolveP(200),
+  resolveP(300),
+])
+.then(data => {
+  console.log('then', data)
+})
+.catch(err => {
+  console.log('catch', err.message)
+})

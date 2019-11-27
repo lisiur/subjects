@@ -13,7 +13,30 @@ function rejectP(n) {
 }
 
 function fetchData(promise) {
-  // TODO
+  // return Promise.race([
+  //   promise,
+  //   new Promise((_, reject) => {
+  //     setTimeout(() => reject(new Error('timeout')), 5000)
+  //   })
+  // ])
+
+  // return new Promise((resolve, reject) => {
+  //   promise.then(resolve).catch(reject)
+  //   setTimeout(() => {
+  //     reject(new Error('timeout'))
+  //   }, 5000)
+  // })
+
+  return new Promise((resolve,reject) => {
+        promise.then( (res) => {
+            resolve(res)
+        }).catch( err => {
+            reject(err)
+        })
+        setTimeout(() => {
+             reject(new Error('timeout'))
+        }, 5000)
+      })
 }
 
 fetchData(resolveP(100))
